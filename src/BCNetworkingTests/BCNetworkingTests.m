@@ -51,6 +51,35 @@
 	}	
 }
 
+-(void)testSimplePost {
+	__block BOOL done = NO;
+	
+	NSDictionary *postData = @{
+		@"foo": @"hello",
+		@"bar": @"world"
+	};
+	
+	BCConnection *connection = [[BCConnection alloc] init];
+	
+	[connection POST:@"http://localhost/post.php" parameters:postData success:^(BCHTTPResponse *response) {
+		XCTAssertEqual(200, response.response.statusCode, @"HTTP statusCode is not 200");
+		XCTAssertNotNil(response.data, @"HTTP response.data is nil");
+		NSDictionary *json = response.responseJSON;
+		XCTAssertNotNil(json, @"JSON is nil");
+		XCTAssertNotNil(json[@"post"], @"$POST is nil");
+		XCTAssertEqualObjects(@"hello", json[@"post"][@"foo"], @"$POST[foo] IS NOT 'hello'");
+		XCTAssertEqualObjects(@"world", json[@"post"][@"bar"], @"$POST[bar] IS NOT 'world'");
+		done = YES;
+	} error:^(NSError *error) {
+		done = YES;
+	}];
+	
+	// check completion async
+	while(!done) {
+		[[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+	}
+}
+
 -(void)testUploadPNG {
 	
 	__block BOOL done = NO;
