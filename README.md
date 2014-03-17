@@ -28,7 +28,7 @@ NSDictionary *postData = @{
   @"bar": @"world"
 };
 BCConnection *connection = [[BCConnection alloc] init];
-[connection POST:@"http://localhost/simple-text.txt" parameters:postData success:^(BCHTTPResponse *response) {
+[connection POST:@"http://localhost/post.php" parameters:postData success:^(BCHTTPResponse *response) {
 		NSLog(@"[DEBUG] ResponseText: %@", response.responseText");
 } error:^(NSError *error) {
 		
