@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HTTPResponse : NSObject
+@interface BCHTTPResponse : NSObject
 
 @property (nonatomic) NSData *data;
 @property (nonatomic) NSHTTPURLResponse *response;
 
 @property (nonatomic, readonly) NSString *responseText;
+@property (nonatomic, readonly) NSDictionary *responseJSON;
 
 @end

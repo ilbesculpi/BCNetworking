@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6275590018D7A4B500367627 /* google.png in Resources */ = {isa = PBXBuildFile; fileRef = 627558FE18D79D5800367627 /* google.png */; };
+		6275590218D7A8B800367627 /* iconfinder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6275590118D7A8B800367627 /* iconfinder.jpg */; };
 		62CDF72C18D355A400C98E7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CDF72B18D355A400C98E7B /* Foundation.framework */; };
 		62CDF73118D355A400C98E7B /* BCNetworking.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 62CDF73018D355A400C98E7B /* BCNetworking.h */; };
 		62CDF73A18D355A400C98E7B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CDF73918D355A400C98E7B /* XCTest.framework */; };
@@ -16,7 +18,7 @@
 		62CDF74618D355A400C98E7B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 62CDF74418D355A400C98E7B /* InfoPlist.strings */; };
 		62CDF74818D355A400C98E7B /* BCNetworkingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CDF74718D355A400C98E7B /* BCNetworkingTests.m */; };
 		62CDF75318D3564F00C98E7B /* BCConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CDF75218D3564F00C98E7B /* BCConnection.m */; };
-		62CDF75618D3578C00C98E7B /* HTTPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CDF75518D3578C00C98E7B /* HTTPResponse.m */; };
+		62CDF75618D3578C00C98E7B /* BCHTTPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 62CDF75518D3578C00C98E7B /* BCHTTPResponse.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		627558FE18D79D5800367627 /* google.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = google.png; sourceTree = "<group>"; };
+		6275590118D7A8B800367627 /* iconfinder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iconfinder.jpg; sourceTree = "<group>"; };
 		62CDF72818D355A400C98E7B /* libBCNetworking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBCNetworking.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		62CDF72B18D355A400C98E7B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		62CDF72F18D355A400C98E7B /* BCNetworking-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BCNetworking-Prefix.pch"; sourceTree = "<group>"; };
@@ -55,8 +59,8 @@
 		62CDF74718D355A400C98E7B /* BCNetworkingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BCNetworkingTests.m; sourceTree = "<group>"; };
 		62CDF75118D3564F00C98E7B /* BCConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCConnection.h; sourceTree = "<group>"; };
 		62CDF75218D3564F00C98E7B /* BCConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCConnection.m; sourceTree = "<group>"; };
-		62CDF75418D3578C00C98E7B /* HTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPResponse.h; sourceTree = "<group>"; };
-		62CDF75518D3578C00C98E7B /* HTTPResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPResponse.m; sourceTree = "<group>"; };
+		62CDF75418D3578C00C98E7B /* BCHTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCHTTPResponse.h; sourceTree = "<group>"; };
+		62CDF75518D3578C00C98E7B /* BCHTTPResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCHTTPResponse.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,8 +121,8 @@
 				62CDF73018D355A400C98E7B /* BCNetworking.h */,
 				62CDF75118D3564F00C98E7B /* BCConnection.h */,
 				62CDF75218D3564F00C98E7B /* BCConnection.m */,
-				62CDF75418D3578C00C98E7B /* HTTPResponse.h */,
-				62CDF75518D3578C00C98E7B /* HTTPResponse.m */,
+				62CDF75418D3578C00C98E7B /* BCHTTPResponse.h */,
+				62CDF75518D3578C00C98E7B /* BCHTTPResponse.m */,
 				62CDF72E18D355A400C98E7B /* Supporting Files */,
 			);
 			path = BCNetworking;
@@ -135,6 +139,8 @@
 		62CDF74118D355A400C98E7B /* BCNetworkingTests */ = {
 			isa = PBXGroup;
 			children = (
+				6275590118D7A8B800367627 /* iconfinder.jpg */,
+				627558FE18D79D5800367627 /* google.png */,
 				62CDF74718D355A400C98E7B /* BCNetworkingTests.m */,
 				62CDF74218D355A400C98E7B /* Supporting Files */,
 			);
@@ -220,6 +226,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6275590018D7A4B500367627 /* google.png in Resources */,
+				6275590218D7A8B800367627 /* iconfinder.jpg in Resources */,
 				62CDF74618D355A400C98E7B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,7 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62CDF75618D3578C00C98E7B /* HTTPResponse.m in Sources */,
+				62CDF75618D3578C00C98E7B /* BCHTTPResponse.m in Sources */,
 				62CDF75318D3564F00C98E7B /* BCConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +425,7 @@
 				62CDF74D18D355A400C98E7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		62CDF74E18D355A400C98E7B /* Build configuration list for PBXNativeTarget "BCNetworkingTests" */ = {
 			isa = XCConfigurationList;
@@ -425,6 +434,7 @@
 				62CDF75018D355A400C98E7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

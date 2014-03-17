@@ -8,5 +8,5 @@
 
 #import <Foundation/Foundation.h>
 
-#import "HTTPResponse.h"
+#import "BCHTTPResponse.h"
 #import "BCConnection.h"
