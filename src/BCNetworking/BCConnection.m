@@ -59,7 +59,37 @@
 	success:(void (^)(BCHTTPResponse *))successHandler
 	  error:(void (^)(NSError *))errorHandler {
 	
+	_success = successHandler;
+	_error = errorHandler;
 	
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+	[request setHTTPMethod:@"POST"];
+	[request setTimeoutInterval:30.0];
+	[request setCachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData];
+	
+	// Paramters
+	if( parameters ) {
+		NSMutableArray *urlParams = [[NSMutableArray alloc] init];
+		for( NSString *key in parameters ) {
+			[urlParams addObject:[NSString stringWithFormat:@"%@=%@", key, parameters[key]]];
+		}
+		NSString *bodyData = [urlParams componentsJoinedByString:@"&"];
+		NSData *paramData = [bodyData dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+		NSString *length = [NSString stringWithFormat:@"%lu", (unsigned long)paramData.length];
+		[request setValue:length forHTTPHeaderField:@"Content-Length"];
+		[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+		[request setHTTPBody:paramData];
+	}
+	
+	_data = [NSMutableData dataWithCapacity: 0];
+	_connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+	if (!_connection) {
+		// Release the receivedData object.
+		_data = nil;
+		// Inform the user that the connection failed.
+		NSError *error = [[NSError alloc] initWithDomain:@"Network Error" code:NSURLErrorUnknown userInfo:nil];
+		_error(error);
+	}
 	
 }
 
