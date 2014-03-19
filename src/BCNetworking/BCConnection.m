@@ -117,10 +117,10 @@
 	NSString *FileParamConstant = fileName;
 	NSString *FileNameConstant = @"image.png";
 	if( [imageType isEqualToString:@"image/png"] ) {
-		FileNameConstant = @"image.png";
+		FileNameConstant = [NSString stringWithFormat:@"%@.png", fileName];
 	}
 	else if( [imageType isEqualToString:@"images/jpeg"] ) {
-		FileNameConstant = @"image.jpg";
+		FileNameConstant = [NSString stringWithFormat:@"%@.jpg", fileName];
 	}
 	
 	// set Content-Type in HTTP header
@@ -143,7 +143,7 @@
 	//NSData *imageData = UIImageJPEGRepresentation(imageToPost, 1.0);
 	if (imageData) {
 		[body appendData:[[NSString stringWithFormat:@"--%@\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
-		[body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"image.png\"\r\n", FileParamConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+		[body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", FileParamConstant, FileNameConstant] dataUsingEncoding:NSUTF8StringEncoding]];
 		[body appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", imageType] dataUsingEncoding:NSUTF8StringEncoding]];
 		[body appendData:imageData];
 		[body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
