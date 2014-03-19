@@ -37,7 +37,7 @@
 	BCConnection *connection = [[BCConnection alloc] init];
 	
 	[connection GET:@"http://localhost/simple-text.txt" parameters:nil success:^(BCHTTPResponse *response) {
-		XCTAssertEqual(200, response.response.statusCode, @"HTTP statusCode is not 200");
+		XCTAssertEqual(200, response.statusCode, @"HTTP statusCode is not 200");
 		XCTAssertNotNil(response.data, @"HTTP response.data is nil");
 		XCTAssertEqualObjects(@"SIMPLE TEXT SAMPLE!", response.responseText, @"HTTP responseText failed.");
 		done = YES;
@@ -62,7 +62,7 @@
 	BCConnection *connection = [[BCConnection alloc] init];
 	
 	[connection POST:@"http://localhost/post.php" parameters:postData success:^(BCHTTPResponse *response) {
-		XCTAssertEqual(200, response.response.statusCode, @"HTTP statusCode is not 200");
+		XCTAssertEqual(200, response.statusCode, @"HTTP statusCode is not 200");
 		XCTAssertNotNil(response.data, @"HTTP response.data is nil");
 		NSDictionary *json = response.responseJSON;
 		XCTAssertNotNil(json, @"JSON is nil");
@@ -93,20 +93,20 @@
 	[connection UPLOAD:@"http://localhost/upload.php"
 			parameters:postData
 				 image:imageData
-				  name:@"file"
+				  name:@"pngfile"
 				  type:@"image/png"
 			   success:^(BCHTTPResponse *response) {
-				   NSInteger responseCode = response.response.statusCode;
+
 				   NSDictionary *json = response.responseJSON;
 				   
 				   // test status code
-				   XCTAssertEqual(200, responseCode, @"HTTP statusCode is not 200");
+				   XCTAssertEqual(200, response.statusCode, @"HTTP statusCode is not 200");
 				   // test post data
 				   XCTAssertEqualObjects(json[@"post"][@"param"], @"value", @"$POST[param] IS NOT EQUAL to 'value'");
 				   // test file object
-				   NSDictionary *file = json[@"files"][@"file"];
+				   NSDictionary *file = json[@"files"][@"pngfile"];
 				   XCTAssertNotNil(file, @"$FILE is NIL");
-				   XCTAssertEqualObjects(@"image.png", file[@"name"], @"$FILE[name] IS NOT 'image.png'");
+				   XCTAssertEqualObjects(@"pngfile.png", file[@"name"], @"$FILE[name] IS NOT 'pngfile.png'");
 				   XCTAssertEqualObjects(@"image/png", file[@"type"], @"$FILE[type] IS NOT 'image/png'");
 				   XCTAssertEqualObjects([NSNumber numberWithInt:0], file[@"error"], @"$FILE[error] IS NOT '0'");
 				   XCTAssertTrue(file[@"size"] > 0, @"$FILE[size] IS NOT > 0");
@@ -137,20 +137,20 @@
 	[connection UPLOAD:@"http://localhost/upload.php"
 			parameters:postData
 				 image:imageData
-				  name:@"picture"
+				  name:@"jpgfile"
 				  type:@"image/jpeg"
 			   success:^(BCHTTPResponse *response) {
-				   NSInteger responseCode = response.response.statusCode;
+				   //NSInteger responseCode = response.response.statusCode;
 				   NSDictionary *json = response.responseJSON;
 				   
 				   // test status code
-				   XCTAssertEqual(200, responseCode, @"HTTP statusCode is not 200");
+				   XCTAssertEqual(200, response.statusCode, @"HTTP statusCode is not 200");
 				   // test post data
 				   XCTAssertEqualObjects(json[@"post"][@"param"], @"value", @"POST.param IS NOT EQUAL to 'value'");
 				   // test file object
-				   NSDictionary *file = json[@"files"][@"picture"];
+				   NSDictionary *file = json[@"files"][@"jpgfile"];
 				   XCTAssertNotNil(file, @"FILES.file is NIL");
-				   XCTAssertEqualObjects(@"image.png", file[@"name"], @"$FILE[name] IS NOT 'image.png'");
+				   XCTAssertEqualObjects(@"jpgfile.jpg", file[@"name"], @"$FILE[name] IS NOT 'jpgfile.jpg'");
 				   XCTAssertEqualObjects(@"image/jpeg", file[@"type"], @"$FILE[type] IS NOT 'image/jpeg'");
 				   XCTAssertEqualObjects([NSNumber numberWithInt:0], file[@"error"], @"FILES.error IS NOT '0'");
 				   XCTAssertTrue(file[@"size"] > 0, @"FILES.size IS NOT > 0");
