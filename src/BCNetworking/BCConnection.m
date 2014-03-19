@@ -119,7 +119,7 @@
 	if( [imageType isEqualToString:@"image/png"] ) {
 		FileNameConstant = [NSString stringWithFormat:@"%@.png", fileName];
 	}
-	else if( [imageType isEqualToString:@"images/jpeg"] ) {
+	else if( [imageType isEqualToString:@"image/jpeg"] ) {
 		FileNameConstant = [NSString stringWithFormat:@"%@.jpg", fileName];
 	}
 	
@@ -185,8 +185,9 @@
 	
     // It can be called multiple times, for example in the case of a
     // redirect, so each time we reset the data.
-	_response = [[BCHTTPResponse alloc] init];
-	_response.response = (NSHTTPURLResponse*)response;
+	//_response = [[BCHTTPResponse alloc] init];
+	//_response.response = (NSHTTPURLResponse*)response;
+	_response = [[BCHTTPResponse alloc] initWithResponse:(NSHTTPURLResponse*)response];
 	
     // receivedData is an instance variable declared elsewhere.
     [_data setLength:0];
