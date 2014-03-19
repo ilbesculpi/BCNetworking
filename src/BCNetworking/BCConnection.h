@@ -11,22 +11,11 @@
 
 @interface BCConnection : NSObject <NSURLConnectionDelegate>
 
-- (void) GET:(NSString*)url
-  parameters:(NSDictionary*)parameters
-	 success:(void (^)(BCHTTPResponse *response))successHandler
-	   error:(void (^)(NSError *error))errorHandler;
+@property (nonatomic, strong) BCHTTPRequest *request;
+@property (nonatomic, weak) void (^successHandler)(BCHTTPResponse *response);
+@property (nonatomic, weak) void (^errorHandler)(NSError *error);
 
-- (void) POST:(NSString*)url
-   parameters:(NSDictionary*)parameters
-	  success:(void (^)(BCHTTPResponse *response))successHandler
-		error:(void (^)(NSError *error))errorHandler;
-
-- (void) UPLOAD:(NSString*)url
-	 parameters:(NSDictionary*)parameters
-		  image:(NSData*)imageData
-		   name:(NSString*)fileName
-		   type:(NSString*)imageType
-		success:(void (^)(BCHTTPResponse *response))successHandler
-		  error:(void (^)(NSError *error))errorHandler;
+-(id)initWithRequest:(BCHTTPRequest*)request;
+-(void)send;
 
 @end

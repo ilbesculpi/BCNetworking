@@ -11,7 +11,6 @@
 @interface BCHTTPResponse : NSHTTPURLResponse <NSCopying>
 
 @property (nonatomic) NSData *data;
-//@property (nonatomic) NSHTTPURLResponse *response;
 @property (nonatomic, readonly) NSString *responseText;
 @property (nonatomic, readonly) NSDictionary *responseJSON;
 

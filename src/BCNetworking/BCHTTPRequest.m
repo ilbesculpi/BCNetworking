@@ -10,4 +10,8 @@
 
 @implementation BCHTTPRequest
 
+-(void)addParameters:(NSDictionary *)parameters {
+	
+}
+
 @end

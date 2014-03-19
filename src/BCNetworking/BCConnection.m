@@ -17,6 +17,18 @@
 }
 
 
+-(id)initWithRequest:(BCHTTPRequest *)request {
+	self = [super init];
+	if( self ) {
+		self.request = request;
+	}
+	return self;
+}
+
+-(void)send {
+	
+}
+
 -(void)GET:(NSString *)url parameters:(NSDictionary *)parameters
    success:(void (^)(BCHTTPResponse *))successHandler
 	 error:(void (^)(NSError *))errorHandler {

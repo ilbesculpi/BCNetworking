@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6248AB3918DA2D3A00D3B78C /* BCHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6248AB3818DA2D3A00D3B78C /* BCHTTPRequest.m */; };
+		6248AB3B18DA4E1E00D3B78C /* BCNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 6248AB3A18DA4E1E00D3B78C /* BCNetworking.m */; };
 		6275590018D7A4B500367627 /* google.png in Resources */ = {isa = PBXBuildFile; fileRef = 627558FE18D79D5800367627 /* google.png */; };
 		6275590218D7A8B800367627 /* iconfinder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6275590118D7A8B800367627 /* iconfinder.jpg */; };
 		62CDF72C18D355A400C98E7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62CDF72B18D355A400C98E7B /* Foundation.framework */; };
@@ -48,6 +49,7 @@
 /* Begin PBXFileReference section */
 		6248AB3718DA2D3A00D3B78C /* BCHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCHTTPRequest.h; sourceTree = "<group>"; };
 		6248AB3818DA2D3A00D3B78C /* BCHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCHTTPRequest.m; sourceTree = "<group>"; };
+		6248AB3A18DA4E1E00D3B78C /* BCNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCNetworking.m; sourceTree = "<group>"; };
 		627558FE18D79D5800367627 /* google.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = google.png; sourceTree = "<group>"; };
 		6275590118D7A8B800367627 /* iconfinder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iconfinder.jpg; sourceTree = "<group>"; };
 		62CDF72818D355A400C98E7B /* libBCNetworking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBCNetworking.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				62CDF73018D355A400C98E7B /* BCNetworking.h */,
+				6248AB3A18DA4E1E00D3B78C /* BCNetworking.m */,
 				62CDF75118D3564F00C98E7B /* BCConnection.h */,
 				62CDF75218D3564F00C98E7B /* BCConnection.m */,
 				6248AB3718DA2D3A00D3B78C /* BCHTTPRequest.h */,
@@ -246,6 +249,7 @@
 			files = (
 				6248AB3918DA2D3A00D3B78C /* BCHTTPRequest.m in Sources */,
 				62CDF75618D3578C00C98E7B /* BCHTTPResponse.m in Sources */,
+				6248AB3B18DA4E1E00D3B78C /* BCNetworking.m in Sources */,
 				62CDF75318D3564F00C98E7B /* BCConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

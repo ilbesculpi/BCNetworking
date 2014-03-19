@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BCHTTPRequest : NSURLRequest
+@interface BCHTTPRequest : NSMutableURLRequest
+
+-(void)addParameters:(NSDictionary*)parameters;
 
 @end
