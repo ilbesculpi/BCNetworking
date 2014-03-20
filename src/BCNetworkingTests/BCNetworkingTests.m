@@ -119,7 +119,6 @@
 	
 	__block BOOL done = NO;
 	
-	NSDictionary *postData = @{@"upload": @"PNG"};
 	NSString *imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"google" ofType:@"png"];
 	UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
 	NSData *imageData = UIImagePNGRepresentation(image);
@@ -127,19 +126,15 @@
 	BCHTTPRequest *request = [[BCHTTPRequest alloc] init];
 	[request setURL:[NSURL URLWithString:@"http://localhost/upload.php"]];
 	[request setHTTPMethod:@"POST"];
-	[request addRequestParameters:postData];
 	[request attachFile:imageData name:@"file" file:@"google.png" type:@"image/png"];
 	
-	BCConnection *connection = [[BCConnection alloc] init];
-	[connection sendRequest:request success:^(BCHTTPResponse *response) {
+	
+	[BCNetworking sendRequest:request success:^(BCHTTPResponse *response) {
 		
 		NSDictionary *json = response.responseJSON;
 		
 		// test status code
 		XCTAssertEqual(200, response.statusCode, @"HTTP statusCode is not 200");
-		// test post data
-		XCTAssertNotNil(json[@"post"], @"$POST IS NULL");
-		XCTAssertEqualObjects(@"PNG", json[@"post"][@"upload"], @"$POST[upload] IS NOT 'PNG'");
 		// test file object
 		XCTAssertNotNil(json[@"files"][@"file"], @"$FILES[file] IS NULL");
 		NSDictionary *file = json[@"files"][@"file"];
@@ -166,7 +161,6 @@
 	
 	__block BOOL done = NO;
 	
-	NSDictionary *postData = @{@"upload": @"JPG"};
 	NSString *imagePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"iconfinder" ofType:@"jpg"];
 	UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
 	NSData *imageData = UIImagePNGRepresentation(image);
@@ -175,7 +169,6 @@
 	BCHTTPRequest *request = [[BCHTTPRequest alloc] init];
 	[request setURL:[NSURL URLWithString:@"http://localhost/upload.php"]];
 	[request setHTTPMethod:@"POST"];
-	[request addRequestParameters:postData];
 	[request attachFile:imageData name:@"file" file:@"iconfinder.jpg" type:@"image/jpeg"];
 	
 	// connection
@@ -186,9 +179,6 @@
 		
 		// test status code
 		XCTAssertEqual(200, response.statusCode, @"HTTP statusCode is not 200");
-		// test post data
-		XCTAssertNotNil(json[@"post"], @"$POST IS NULL");
-		XCTAssertEqualObjects(@"JPG", json[@"post"][@"upload"], @"$POST[upload] IS NOT 'JPG'");
 		// test file object
 		XCTAssertNotNil(json[@"files"][@"file"], @"$FILES[file] IS NULL");
 		NSDictionary *file = json[@"files"][@"file"];

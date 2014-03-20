@@ -54,10 +54,6 @@
 
 -(void)setup {
 	
-	if( !self.requestParameters ) {
-		return;
-	}
-	
 	if( [self.HTTPMethod isEqualToString:@"GET"] ) {
 		// modify the URL to append query parameters
 		NSMutableArray *urlParams = [[NSMutableArray alloc] init];
@@ -69,7 +65,7 @@
 	}
 	else if( [self.HTTPMethod isEqualToString:@"POST"] || [self.HTTPMethod isEqualToString:@"PUT"] ) {
 		
-		static NSString *BoundaryConstant = @"----------BCS147137N0VcXz24Ca45K08y";
+		static NSString *BoundaryConstant = @"----------BCS147133036290140";
 		
 		// set Content-Type in HTTP header
 		NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", BoundaryConstant];
@@ -97,7 +93,7 @@
 			}
 		}
 		
-		[body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
+		[body appendData:[[NSString stringWithFormat:@"--%@--\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
 		
 		// setting the body of the post to the reqeust
 		[self setHTTPBody:body];
