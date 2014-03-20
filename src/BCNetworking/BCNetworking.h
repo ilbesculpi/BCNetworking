@@ -8,5 +8,24 @@
 
 #import <Foundation/Foundation.h>
 
+#import "BCHTTPRequest.h"
 #import "BCHTTPResponse.h"
 #import "BCConnection.h"
+
+@interface BCNetworking : NSObject
+
++ (void) GET:(NSString*)url
+  parameters:(NSDictionary*)parameters
+	 success:(void (^)(BCHTTPResponse *response))success
+	   error:(void (^)(NSError *error))error;
+
++ (void) POST:(NSString*)url
+   parameters:(NSDictionary*)parameters
+	  success:(void (^)(BCHTTPResponse *response))success
+		error:(void (^)(NSError *error))error;
+
++ (void) sendRequest:(BCHTTPRequest*)request
+			 success:(void (^)(BCHTTPResponse *response))success
+			   error:(void (^)(NSError *error))error;
+
+@end

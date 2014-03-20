@@ -12,87 +12,49 @@
 	NSMutableData *_data;
 	NSURLConnection *_connection;
 	BCHTTPResponse *_response;
-	void (^_success)(BCHTTPResponse*);
-	void (^_error)(NSError*);
+	//void (^_success)(BCHTTPResponse*);
+	//void (^_error)(NSError*);
 }
 
 
--(void)GET:(NSString *)url parameters:(NSDictionary *)parameters
-   success:(void (^)(BCHTTPResponse *))successHandler
-	 error:(void (^)(NSError *))errorHandler {
-	
-	_success = successHandler;
-	_error = errorHandler;
-	
-	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
-	[request setHTTPMethod:@"GET"];
-	[request setTimeoutInterval:30.0];
-	[request setCachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData];
-	
-	// Paramters
-	if( parameters ) {
-		NSMutableArray *urlParams = [[NSMutableArray alloc] init];
-		for( NSString *key in parameters ) {
-			[urlParams addObject:[NSString stringWithFormat:@"%@=%@", key, parameters[key]]];
-		}
-		NSString *bodyData = [urlParams componentsJoinedByString:@"&"];
-		NSData *paramData = [bodyData dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-		NSString *length = [NSString stringWithFormat:@"%lu", (unsigned long)paramData.length];
-		[request setValue:length forHTTPHeaderField:@"Content-Length"];
-		[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-		[request setHTTPBody:paramData];
+-(id)initWithRequest:(BCHTTPRequest *)request {
+	self = [super init];
+	if( self ) {
+		self.request = request;
 	}
+	return self;
+}
+
+
+-(void)send {
+	
+	[self.request setup];
 	
 	_data = [NSMutableData dataWithCapacity: 0];
-	_connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+	_connection = [[NSURLConnection alloc] initWithRequest:_request delegate:self];
+	
 	if (!_connection) {
 		// Release the receivedData object.
 		_data = nil;
 		// Inform the user that the connection failed.
 		NSError *error = [[NSError alloc] initWithDomain:@"Network Error" code:NSURLErrorUnknown userInfo:nil];
-		_error(error);
+		self.errorHandler(error);
 	}
 }
 
-
--(void)POST:(NSString *)url parameters:(NSDictionary *)parameters
-	success:(void (^)(BCHTTPResponse *))successHandler
-	  error:(void (^)(NSError *))errorHandler {
+-(void)sendRequest:(BCHTTPRequest *)request
+		   success:(void (^)(BCHTTPResponse *))success
+			 error:(void (^)(NSError *))error {
 	
-	_success = successHandler;
-	_error = errorHandler;
+	self.request = request;
+	self.successHandler = success;
+	self.errorHandler = error;
 	
-	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
-	[request setHTTPMethod:@"POST"];
-	[request setTimeoutInterval:30.0];
-	[request setCachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData];
-	
-	// Paramters
-	if( parameters ) {
-		NSMutableArray *urlParams = [[NSMutableArray alloc] init];
-		for( NSString *key in parameters ) {
-			[urlParams addObject:[NSString stringWithFormat:@"%@=%@", key, parameters[key]]];
-		}
-		NSString *bodyData = [urlParams componentsJoinedByString:@"&"];
-		NSData *paramData = [bodyData dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-		NSString *length = [NSString stringWithFormat:@"%lu", (unsigned long)paramData.length];
-		[request setValue:length forHTTPHeaderField:@"Content-Length"];
-		[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-		[request setHTTPBody:paramData];
-	}
-	
-	_data = [NSMutableData dataWithCapacity: 0];
-	_connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-	if (!_connection) {
-		// Release the receivedData object.
-		_data = nil;
-		// Inform the user that the connection failed.
-		NSError *error = [[NSError alloc] initWithDomain:@"Network Error" code:NSURLErrorUnknown userInfo:nil];
-		_error(error);
-	}
-	
+	[self send];
 }
 
+
+/*
 -(void)UPLOAD:(NSString *)url
    parameters:(NSDictionary *)parameters
 		image:(NSData *)imageData
@@ -102,9 +64,6 @@
 		error:(void (^)(NSError *))errorHandler {
 	
 
-	_success = successHandler;
-	_error = errorHandler;
-	
 	// create request
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
 	[request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
@@ -119,7 +78,7 @@
 	if( [imageType isEqualToString:@"image/png"] ) {
 		FileNameConstant = [NSString stringWithFormat:@"%@.png", fileName];
 	}
-	else if( [imageType isEqualToString:@"images/jpeg"] ) {
+	else if( [imageType isEqualToString:@"image/jpeg"] ) {
 		FileNameConstant = [NSString stringWithFormat:@"%@.jpg", fileName];
 	}
 	
@@ -175,7 +134,7 @@
 	}
 	
 }
-
+*/
 
 #pragma mark - NSURLConnectionDelegate
 
@@ -185,8 +144,9 @@
 	
     // It can be called multiple times, for example in the case of a
     // redirect, so each time we reset the data.
-	_response = [[BCHTTPResponse alloc] init];
-	_response.response = (NSHTTPURLResponse*)response;
+	//_response = [[BCHTTPResponse alloc] init];
+	//_response.response = (NSHTTPURLResponse*)response;
+	_response = [[BCHTTPResponse alloc] initWithResponse:(NSHTTPURLResponse*)response];
 	
     // receivedData is an instance variable declared elsewhere.
     [_data setLength:0];
@@ -201,8 +161,9 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     _connection = nil;
     _data = nil;
+	
 	// inform the user
-	_error(error);
+	self.errorHandler(error);
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
@@ -210,9 +171,9 @@
     // receivedData is declared as a property elsewhere
     NSLog(@"[INFO] Received %lu bytes of data",(unsigned long)[_data length]);
 	[_response setData:_data];
-	_success(_response);
     _connection = nil;
     _data = nil;
+	self.successHandler(_response);
 }
 
 @end

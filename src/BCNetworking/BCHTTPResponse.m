@@ -7,8 +7,25 @@
 //
 
 #import "BCHTTPResponse.h"
+#import <objc/runtime.h>
+//#import <Foundation/Foundation.h>
+
+@interface BCHTTPResponse()
+
+@property (nonatomic) NSHTTPURLResponse *http;
+
+@end
 
 @implementation BCHTTPResponse
+
+-(id)initWithResponse:(NSHTTPURLResponse *)response {
+	self = [super init];
+	if( self ) {
+		self.http = response;
+	}
+	return self;
+}
+
 
 -(NSString*)responseText {
 	return [[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding];
@@ -18,6 +35,13 @@
 	NSError *error;
 	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
 	return json;
+}
+
+
+#pragma mark - NSHTTPURLResponse
+
+-(NSInteger)statusCode {
+	return self.http.statusCode;
 }
 
 @end

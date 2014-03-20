@@ -1,36 +1,65 @@
-#BCNetworking
-
+# BCNetworking
 
 This library aims to provide a simple, yet useful library for managing HTTP resquest and response.
 
-##Installation
+
+## Installation
 
 * Copy the folder `BCNetworking` to your project.
+* Add `#import BCNetworking.h`
+
 
 ## Usage
 
-### Simple GET Request
+### Simple GET/POST requests
+
+BCNetworking provides 2 simple ways to send/receive data from/to your server. These shortcut allows you to send and receive data using GET or POST method.
 
 ```
-BCConnection *connection = [[BCConnection alloc] init];
-[connection GET:@"http://localhost/simple-text.txt" parameters:nil success:^(BCHTTPResponse *response) {
-		NSLog(@"[DEBUG] ResponseText: %@", response.responseText");
-} error:^(NSError *error) {
-		
-}];
+// Simple GET Request
+[BCNetworking GET:@"http://example.com/script.php" parameters:nil success:^(BCHTTPResponse *response) {
+		NSLog(@"Received: %@", response.responseText);
+	} error:^(NSError *error) {
+		NSLog(@"An error occured.");
+	}
+];
+
+// Simple POST Request
+NSDictionary *query = @{ @"foo": @"hello", @"bar": @"world" };	// post data
+[BCNetworking POST:@"http://example.com/script.php" parameters:query success:^(BCHTTPResponse *response) {
+		NSLog(@"Received: %@", response.responseText);
+	} error:^(NSError *error) {
+		NSLog(@"An error occured.");
+	}
+];
+
 ```
 
-### Simple POST Request
+### Upload Files
 
 ```
-NSDictionary *postData = @{
-  @"foo": @"hello",
-  @"bar": @"world"
-};
-BCConnection *connection = [[BCConnection alloc] init];
-[connection POST:@"http://localhost/post.php" parameters:postData success:^(BCHTTPResponse *response) {
-		NSLog(@"[DEBUG] ResponseText: %@", response.responseText");
-} error:^(NSError *error) {
-		
-}];
+UIImage *image = [UIImage imageNamed:@"picture.png"];
+NSData *fileData = UIImagePNGRepresentation(image);
+BCHTTPRequest *request = [[BCHTTPRequest alloc] init];
+[request setURL:[NSURL URLWithString:@"http://example.com/upload.php"]];
+[request setHTTPMethod:@"POST"];
+[request attachFile:fileData name:@"file" file:@"picture.png" type:@"image/png"];
+
+[BCNetworking sendResquest:request success:success:^(BCHTTPResponse *response) {
+		NSLog(@"File uploaded.");
+	} error: error:^(NSError *error) {
+		NSLog(@"Error uploading file.");
+	}
+];
 ```
+
+### Response Format
+
+`BCHTTPResponse` has various methods to parse the response received from the server.
+
+* data: returns the response in NSData
+* responseText: returns the response as NSString
+* responseJSON: returns a NSDictionary for the JSON object
+* responseXML: returns a NSDictionary for the root XML object
+
+
