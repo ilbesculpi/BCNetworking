@@ -35,7 +35,25 @@ NSDictionary *query = @{ @"foo": @"hello", @"bar": @"world" };	// post data
 
 ```
 
-### Response Formats
+### Upload Files
+
+```
+UIImage *image = [UIImage imageNamed:@"picture.png"];
+NSData *fileData = UIImagePNGRepresentation(image);
+BCHTTPRequest *request = [[BCHTTPRequest alloc] init];
+[request setURL:[NSURL URLWithString:@"http://example.com/upload.php"]];
+[request setHTTPMethod:@"POST"];
+[request attachFile:fileData name:@"file" file:@"picture.png" type:@"image/png"];
+
+[BCNetworking sendResquest:request success:success:^(BCHTTPResponse *response) {
+		NSLog(@"File uploaded.");
+	} error: error:^(NSError *error) {
+		NSLog(@"Error uploading file.");
+	}
+];
+```
+
+### Response Format
 
 `BCHTTPResponse` has various methods to parse the response received from the server.
 
