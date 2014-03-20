@@ -45,7 +45,7 @@ BCHTTPRequest *request = [[BCHTTPRequest alloc] init];
 [request setHTTPMethod:@"POST"];
 [request attachFile:fileData name:@"file" file:@"picture.png" type:@"image/png"];
 
-[BCNetworking sendResquest:request success:success:^(BCHTTPResponse *response) {
+[BCNetworking sendResquest:request success:^(BCHTTPResponse *response) {
 		NSLog(@"File uploaded.");
 	} error:^(NSError *error) {
 		NSLog(@"Error uploading file.");
