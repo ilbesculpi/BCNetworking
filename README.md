@@ -55,11 +55,10 @@ BCHTTPRequest *request = [[BCHTTPRequest alloc] init];
 
 ### Response Format
 
-`BCHTTPResponse` has various methods to parse the response received from the server.
+`BCHTTPResponse` has some methods to parse the response received from the server.
 
-* data: returns the response in NSData
-* responseText: returns the response as NSString
-* responseJSON: returns a NSDictionary for the JSON object
-* responseXML: returns a NSDictionary for the root XML object
-
+* data: returns the raw response as NSData.
+* responseText: returns the response as NSString.
+* responseJSON: returns a NSDictionary for the JSON object.
+* responseXML: returns a NSDictionary for the root XML object.
 
