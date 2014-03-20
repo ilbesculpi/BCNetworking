@@ -57,4 +57,9 @@
 	[connection send];
 }
 
++ (void) sendRequest:(BCHTTPRequest *)request success:(void (^)(BCHTTPResponse *))success error:(void (^)(NSError *))error {
+	BCConnection *connection = [[BCConnection alloc] init];
+	[connection sendRequest:request success:success error:error];
+}
+
 @end
