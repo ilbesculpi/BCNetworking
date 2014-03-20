@@ -47,7 +47,7 @@ BCHTTPRequest *request = [[BCHTTPRequest alloc] init];
 
 [BCNetworking sendResquest:request success:success:^(BCHTTPResponse *response) {
 		NSLog(@"File uploaded.");
-	} error: error:^(NSError *error) {
+	} error:^(NSError *error) {
 		NSLog(@"Error uploading file.");
 	}
 ];
