@@ -98,7 +98,6 @@
 		}
 		
 		[body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
-		//[body appendData:[[NSString stringWithFormat:@"--%@--\r\n", BoundaryConstant] dataUsingEncoding:NSUTF8StringEncoding]];
 		
 		// setting the body of the post to the reqeust
 		[self setHTTPBody:body];
@@ -106,13 +105,6 @@
 		// set the content-length
 		NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[body length]];
 		[self setValue:postLength forHTTPHeaderField:@"Content-Length"];
-		
-		//NSString *bodyData = [urlParams componentsJoinedByString:@"&"];
-		//NSData *paramData = [bodyData dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-		//NSString *length = [NSString stringWithFormat:@"%lu", (unsigned long)paramData.length];
-		//[self setValue:length forHTTPHeaderField:@"Content-Length"];
-		//[self setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-		//[self setHTTPBody:paramData];
 	}
 }
 
