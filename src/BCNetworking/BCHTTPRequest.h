@@ -10,6 +10,9 @@
 
 @interface BCHTTPRequest : NSMutableURLRequest
 
--(void)addParameters:(NSDictionary*)parameters;
+-(void)addRequestParameters:(NSDictionary*)parameters;
+-(void)setValue:(NSString*)value forRequestParameter:(NSString*)parameter;
+-(void)attachFile:(NSData*)fileData name:(NSString*)name file:(NSString*)file type:(NSString*)type;
+-(void)setup;
 
 @end

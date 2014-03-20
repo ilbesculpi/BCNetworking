@@ -22,7 +22,8 @@
 	BCHTTPRequest *request = [[BCHTTPRequest alloc] init];
 	[request setURL:[NSURL URLWithString:url]];
 	[request setHTTPMethod:@"GET"];
-	[request addParameters:parameters];
+	[request addRequestParameters:parameters];
+	connection.request = request;
 	
 	// handlers
 	connection.successHandler = success;
@@ -45,7 +46,8 @@
 	BCHTTPRequest *request = [[BCHTTPRequest alloc] init];
 	[request setURL:[NSURL URLWithString:url]];
 	[request setHTTPMethod:@"POST"];
-	[request addParameters:parameters];
+	[request addRequestParameters:parameters];
+	connection.request = request;
 	
 	// handlers
 	connection.successHandler = success;

@@ -12,10 +12,16 @@
 @interface BCConnection : NSObject <NSURLConnectionDelegate>
 
 @property (nonatomic, strong) BCHTTPRequest *request;
-@property (nonatomic, weak) void (^successHandler)(BCHTTPResponse *response);
-@property (nonatomic, weak) void (^errorHandler)(NSError *error);
+@property (nonatomic, strong) void (^successHandler)(BCHTTPResponse *response);
+@property (nonatomic, strong) void (^errorHandler)(NSError *error);
+
 
 -(id)initWithRequest:(BCHTTPRequest*)request;
+
 -(void)send;
+
+-(void)sendRequest:(BCHTTPRequest*)request
+		   success:(void (^)(BCHTTPResponse *response))success
+			 error:(void (^)(NSError *error))error;
 
 @end
