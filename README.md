@@ -1,6 +1,6 @@
 # BCNetworking
 
-This library aims to provide a simple, yet useful library for managing HTTP resquest and response.
+BCNetworking aims to provide a simple, yet useful library for managing your everyday HTTP resquests and responses.
 
 
 ## Installation
