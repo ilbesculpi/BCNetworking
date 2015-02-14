@@ -15,7 +15,7 @@ This library aims to provide a simple, yet useful library for managing HTTP resq
 
 BCNetworking provides 2 simple ways to send/receive data from/to your server. These shortcut allows you to send and receive data using GET or POST method.
 
-```
+```Objective-C
 // Simple GET Request
 [BCNetworking GET:@"http://example.com/script.php" parameters:nil success:^(BCHTTPResponse *response) {
 		NSLog(@"Received: %@", response.responseText);
@@ -32,12 +32,11 @@ NSDictionary *query = @{ @"foo": @"hello", @"bar": @"world" };	// post data
 		NSLog(@"An error occured.");
 	}
 ];
-
 ```
 
 ### Upload Files
 
-```
+```Objective-C
 UIImage *image = [UIImage imageNamed:@"picture.png"];
 NSData *fileData = UIImagePNGRepresentation(image);
 BCHTTPRequest *request = [[BCHTTPRequest alloc] init];
