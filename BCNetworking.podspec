@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
 
   # -- Meta -- #
   s.name         = "BCNetworking"
-  s.version      = "0.1.0"
+  s.version      = "0.2.0"
   s.summary      = "BCNetworking aims to provide a simple, yet useful library for managing your everyday HTTP resquests and responses."
   s.homepage     = "https://github.com/ilbesculpi/BCNetworking"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "6.0"
 
   # --- Source --- #
-  s.source       = { :git => "https://github.com/ilbesculpi/BCNetworking.git", :tag => "v0.1" }
+  s.source       = { :git => "https://github.com/ilbesculpi/BCNetworking.git", :tag => "v0.2" }
   s.source_files  = "lib/BCNetworking/*"
   s.requires_arc = true
   
