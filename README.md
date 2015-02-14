@@ -9,6 +9,14 @@ BCNetworking aims to provide a simple, yet useful library for managing your ever
 * Add `#import BCNetworking.h`
 
 
+## Installation via CocoaPods
+
+You can install BCNetworking in your project by using [CocoaPods](http://cocoapods.org/)
+
+```ruby
+pod 'BCNetworking', '~> 0.2'
+```
+
 ## Usage
 
 ### Simple GET/POST requests
