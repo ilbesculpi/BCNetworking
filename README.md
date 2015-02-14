@@ -5,7 +5,7 @@ BCNetworking aims to provide a simple, yet useful library for managing your ever
 
 ## Installation
 
-* Copy the folder `BCNetworking` to your project.
+* Copy the contents of the `lib/BCNetworking` folder to your project.
 * Add `#import BCNetworking.h`
 
 
