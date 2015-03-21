@@ -169,8 +169,7 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     // do something with the data
     // receivedData is declared as a property elsewhere
-    NSLog(@"[INFO] Received %lu bytes of data",(unsigned long)[_data length]);
-	[_response setData:_data];
+    [_response setData:_data];
     _connection = nil;
     _data = nil;
 	self.successHandler(_response);
